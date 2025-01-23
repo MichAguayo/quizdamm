@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar class="toolbar">
+    <ion-title class="tituloo">Quiz DAMM - Registro de eventos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="estilo" padding>
+  <h2>Registrar evento </h2>
+
+  <!-- Formulario para registrar los datos del evento -->
+  <input #eventNameInput type="text" placeholder="Nombre del evento" />
+  <input #startDateInput type="date" placeholder="Fecha de inicio" />
+  <input #endDateInput type="date" placeholder="Fecha de fin" />
+  <input #locationInput type="text" placeholder="Ubicación" />
+  <input #managerNameInput type="text" placeholder="Nombre del encargado" />
+  <input #phoneInput type="text" placeholder="Teléfono del encargado" />
+
+  <button
+    (click)="addEvent(
+      eventNameInput.value,
+      startDateInput.value,
+      endDateInput.value,
+      locationInput.value,
+      managerNameInput.value,
+      phoneInput.value
+    );
+    eventNameInput.value = '';
+    startDateInput.value = '';
+    endDateInput.value = '';
+    locationInput.value = '';
+    managerNameInput.value = '';
+    phoneInput.value = ''"
+  >
+    Registrar Evento
+  </button>
+
+  <!-- Tabla para mostrar la lista de eventos registrados -->
+  <table class="tablita" border="1" style="margin-top: 20px; width: 100%; text-align: left">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Fecha de inicio</th>
+        <th>Fecha de terminado</th>
+        <th>Lugar</th>
+        <th>Encargado</th>
+        <th>Teléfono</th>
+        <th>Confirmar</th>
+        <th>Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let event of events">
+        <td>{{ event.id }}</td>
+        <td>{{ event.name }}</td>
+        <td>{{ event.startDate }}</td>
+        <td>{{ event.endDate }}</td>
+        <td>{{ event.location }}</td>
+        <td>{{ event.managerName }}</td>
+        <td>{{ event.phone }}</td>
+        <td>
+          <input
+            type="checkbox"
+            [checked]="event.confirmed"
+            (change)="toggleConfirmation(event.id)"
+          />
+        </td>
+        <td>
+          <button (click)="removeEvent(event.id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</ion-content>

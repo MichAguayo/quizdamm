@@ -1,0 +1,7 @@
+{
+  "name": "quiztry",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
